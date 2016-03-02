@@ -1,0 +1,77 @@
+*{
+    box-sizing: border-box;
+}
+
+/* リンクの色 */
+a{
+    color: #C2185B;
+}
+
+/* 追加ボタン */
+input[name="commit"]{
+    background: #4CAF50;
+    border: 0px solid #388E3C;
+}
+
+/* 追加ボタンにマウスカーソルを合わせたとき */
+input[name="commit"]:hover{
+    background: #388E3C;
+    
+    /* 変わる時間 */
+    transition: 0.3s;
+}
+
+/* 入力フォーム */
+#frm{
+    width: 100%;
+    
+    /* 場所を固定 */
+    position: fixed;
+    
+    /* 場所を下にする */
+    bottom: 0;
+    
+    /* 余白 */
+    padding: 20px;
+    
+    /* 影の横(x)の位置 縦(y)の位置 ぼかし 幅 色 */
+    box-shadow: 0px -1px 1px 1px #e0e0e0;
+}
+
+/* ブックマーク共通 */
+.col-md-3{
+    height: 340px;
+    
+    /* 上の枠 */
+    border-top: 8px solid #FF5252;
+}
+
+/* 2の倍数のブックマーク */
+.col-md-3:nth-child(2n){
+    border-top: 8px solid #9C27B0;
+}
+
+/* 3の倍数のブックマーク */
+.col-md-3:nth-child(3n){
+    border-top: 8px solid #3F51B5;
+}
+
+/* 4の倍数のブックマーク */
+.col-md-3:nth-child(4n){
+    border-top: 8px solid #03A9F4;
+}
+
+/* 5の倍数のブックマーク */
+.col-md-3:nth-child(5n){
+    border-top: 8px solid #009688;
+}
+
+/* 6の倍数のブックマーク */
+.col-md-3:nth-child(6n){
+    border-top: 8px solid #8BC34A;
+}
+
+/* 7の倍数のブックマーク */
+.col-md-3:nth-child(7n){
+    border-top: 8px solid #FFC107;
+}

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Mytrade2</title>
+  <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+  <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+</head>
+<body>
+  <style>
+  body
+{
+    margin-top: 20px;
+}
+.panel
+{
+    text-align: center;
+}
+.panel:hover { box-shadow: 0 1px 5px rgba(0, 0, 0, 0.4), 0 1px 5px rgba(130, 130, 130, 0.35); }
+.panel-body
+{
+    padding: 0px;
+    text-align: center;
+}
+
+.the-price
+{
+    background-color: rgba(220,220,220,.17);
+    box-shadow: 0 1px 0 #dcdcdc, inset 0 1px 0 #fff;
+    padding: 20px;
+    margin: 0;
+}
+
+.the-price h1
+{
+    line-height: 1em;
+    padding: 0;
+    margin: 0;
+}
+
+.subscript
+{
+    font-size: 25px;
+}
+
+/* CSS-only ribbon styles    */
+.cnrflash
+{
+    /*Position correctly within container*/
+    position: absolute;
+    top: -9px;
+    right: 4px;
+    z-index: 1; /*Set overflow to hidden, to mask inner square*/
+    overflow: hidden; /*Set size and add subtle rounding  		to soften edges*/
+    width: 100px;
+    height: 100px;
+    border-radius: 3px 5px 3px 0;
+}
+.cnrflash-inner
+{
+    /*Set position, make larger then 			container and rotate 45 degrees*/
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 145px;
+    height: 145px;
+    -ms-transform: rotate(45deg); /* IE 9 */
+    -o-transform: rotate(45deg); /* Opera */
+    -moz-transform: rotate(45deg); /* Firefox */
+    -webkit-transform: rotate(45deg); /* Safari and Chrome */
+    -webkit-transform-origin: 100% 100%; /*Purely decorative effects to add texture and stuff*/ /* Safari and Chrome */
+    -ms-transform-origin: 100% 100%;  /* IE 9 */
+    -o-transform-origin: 100% 100%; /* Opera */
+    -moz-transform-origin: 100% 100%; /* Firefox */
+    background-image: linear-gradient(90deg, transparent 50%, rgba(255,255,255,.1) 50%), linear-gradient(0deg, transparent 0%, rgba(1,1,1,.2) 50%);
+    background-size: 4px,auto, auto,auto;
+    background-color: #aa0101;
+    box-shadow: 0 3px 3px 0 rgba(1,1,1,.5), 0 1px 0 0 rgba(1,1,1,.5), inset 0 -1px 8px 0 rgba(255,255,255,.3), inset 0 -1px 0 0 rgba(255,255,255,.2);
+}
+.cnrflash-inner:before, .cnrflash-inner:after
+{
+    /*Use the border triangle trick to make  				it look like the ribbon wraps round it's 				container*/
+    content: " ";
+    display: block;
+    position: absolute;
+    bottom: -16px;
+    width: 0;
+    height: 0;
+    border: 8px solid #800000;
+}
+.cnrflash-inner:before
+{
+    left: 1px;
+    border-bottom-color: transparent;
+    border-right-color: transparent;
+}
+.cnrflash-inner:after
+{
+    right: 0;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+}
+.cnrflash-label
+{
+    /*Make the label look nice*/
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    padding-bottom: 5px;
+    color: #fff;
+    text-shadow: 0 1px 1px rgba(1,1,1,.8);
+    font-size: 0.95em;
+    font-weight: bold;
+    text-align: center;
+}
+
+/*
+Code snippet by maridlcrmn for Bootsnipp.com
+Follow me on Twitter @maridlcrmn
+*/
+
+.navbar-brand { position: relative; z-index: 2; }
+
+.navbar-nav.navbar-right .btn { position: relative; z-index: 2; padding: 4px 20px; margin: 10px auto; }
+
+.navbar .navbar-collapse { position: relative; }
+.navbar .navbar-collapse .navbar-right > li:last-child { padding-left: 22px; }
+
+.navbar .nav-collapse { position: absolute; z-index: 1; top: 0; left: 0; right: 0; bottom: 0; margin: 0; padding-right: 120px; padding-left: 80px; width: 100%; }
+.navbar.navbar-default .nav-collapse { background-color: #f8f8f8; }
+.navbar.navbar-inverse .nav-collapse { background-color: #222; }
+.navbar .nav-collapse .navbar-form { border-width: 0; box-shadow: none; }
+.nav-collapse>li { float: right; }
+
+.btn.btn-circle { border-radius: 50px; }
+.btn.btn-outline { background-color: transparent; }
+
+@media screen and (max-width: 767px) {
+    .navbar .navbar-collapse .navbar-right > li:last-child { padding-left: 15px; padding-right: 15px; } 
+    
+    .navbar .nav-collapse { margin: 7.5px auto; padding: 0; }
+    .navbar .nav-collapse .navbar-form { margin: 0; }
+    .nav-collapse>li { float: none; }
+}
+  </style>
+    <div class="comment-form">
+    <input id="submit-update" type="button" value="更新する" />
+  </div>
+  <div class="comment-view">
+    <div id="comments">
+    </div>
+  </div>      
+    <script>
+    $(function(){
+      $("#submit-update").click(function(){
+            var request = $.ajax({
+            type: "GET",
+            url: "/update",
+        })
+    .done(function(res){
+        console.log('www')
+        // $("#comments").prepend('<p>' + escapeHTML(res.body) + ' by ' + escapeHTML(res.user_id) + ‘</p>');
+    });
+          })
+      })
+      
+      request.done(function(){
+    $.ajax({
+        type: "GET",
+        url: "/update”,
+        dataType: “json”
+    });
+    });
+
+    </script>
+  <div class="container-fluid">
+    <!-- Second navbar for categories -->
+    <nav class="navbar navbar-default">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">あもすけ</a>
+        </div>
+    
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-right">
+            <% @categories.each do |category| %>
+            <li><a href="/category/<%= category.id %>"><%= category.name %></a></li>
+            <% end %>
+            <li>
+                <form action='/update' method='get'>
+                 <button type="submit" >(仮)自動更新</button>
+                </form>
+            </li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container -->
+    </nav><!-- /.navbar -->
+    
+<form action="/create" method ="post">
+  <fieldset>
+    <!--<legend>銘柄を追加</legend>-->
+    <label for="brand_name">銘柄名</label>
+    <input type="text" name="brand_name" id="brand_name" placeholder="銘柄名">
+    <label for="code">コード</label>
+    <input type="text" name="code" id="code" placeholder="code">
+    <select name="category" id="category">
+      <% @categories.each do |category| %>
+        <option value="<%= category.id %>"><%= category.name %></option>
+      <% end %>
+    </select>
+    <label>指定価格</label>
+    <input type="text" name="price2" placeholde="トレード価格">
+    <button type="submit" class="pure-button pure-button-primary">追加</button>
+  </fieldset>
+</form>
+
+<div>
+</div>
+  <!--<li>-->
+<div class="container">
+    <div class="row">
+        <% @brands.each do |brand| %>
+        <div data-id = "<%= brand.id %>">
+        <div class="col-xs-12 col-md-2">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                         <%= brand.brand_name %>
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <div class="the-price">
+                        <h1>
+                            <%= brand.price2 %><span class="subscript"><br><small>指定価格</small>
+                            <br><%= brand.price3 %></span></h1>
+                            <small>now price</small>
+                    </div>
+                    <table class="table">
+                        <tr>
+                            <td>
+                                <% if brand.price3 == "---" %>
+                                    <p>---</p>
+                                <% elsif brand.price3 == nil %>
+                                    <p>---</p>
+                                <% else %>
+                                   <% a = brand.price3.to_f - brand.price4.to_f %>
+                                   <% b = a / brand.price4.to_f %>
+                                   <% c = b*100 %>
+                                   <% if a > 0 %>
+                                       <span style="color: Red"><%= a %>(<%= c.round(2) %> % )</span>
+                                   <% elsif a < 0 %>
+                                       <span style="color: Blue"><%= a %>(<%= c.round(2) %> % )</span>
+                                   <% else %>
+                                       <span style="color: Black"><%= a %>(<%= c.round(2) %> % )</span>
+                                   <% end %>
+                                <% end %>
+                            </td>
+                        </tr>
+                        <tr class="active">
+                            <td>
+                                <small>前日比 ;</small>
+                            </td>
+                        </tr>
+                        
+                    </table>
+                </div>
+                <form action="/delete/<%= brand.id %>" method="POST">
+                  <input type="submit" value="削除">
+                </form>
+                <!--Ajaxを用いて削除機能実装を試みるも、、できず-->
+                <!--<span class='deleteCmd' style="cursor:pointer;color:Blue">[×]</span>-->
+                <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>-->
+                <!--<script>-->
+                <!--    $('.deleteCmd').click(function(){-->
+                <!--        var el = $(this).parent.parent.parent();-->
+                <!--        if (confirm('are you sure to delete ?')){-->
+                <!--            $.post('/delete',{-->
+                <!--                id: el.data('id')-->
+                <!--            },function(){-->
+                <!--                el.fadeOut(800);-->
+                <!--            });-->
+                <!--            }-->
+                <!--        }-->
+                <!--    })-->
+                <!--</script>-->
+            </div>
+        </div>
+        </div>
+        <% end %>
+    </div>
+</div>
+<!--</li>-->
+
+</body>
+</html>
